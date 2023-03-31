@@ -10,6 +10,20 @@ const addBankCharges = async (req, res) => {
   }
 };
 
+const updateStatus = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const updatedData = await BankChargesModal.findByIdAndUpdate(
+      id,
+      { status: req.body.status },
+      { new: true }
+    );
+    res.status(200).send({ status: "success", data: updatedData });
+  } catch (er) {
+    res.status(401).send({ status: "error", message: er.message });
+  }
+};
+
 const getBankCharges = async (req, res) => {
   try {
     const BankCharges = await BankChargesModal.find();
@@ -22,4 +36,5 @@ const getBankCharges = async (req, res) => {
 module.exports = {
   addBankCharges,
   getBankCharges,
+  updateStatus,
 };

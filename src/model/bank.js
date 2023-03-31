@@ -9,6 +9,7 @@ const BankChargeSchema = new mongoose.Schema({
   instm_no: { type: Number },
   bank: { type: String, required: true },
   charge_type: { type: String, required: true },
+  status: { type: Boolean, default: false },
 });
 
 BankChargeSchema.pre("save", function (next) {
@@ -16,7 +17,6 @@ BankChargeSchema.pre("save", function (next) {
   let i_num = Math.floor(Math.random() * 90000) + 10000;
   this.batch_no = b_num;
   this.instm_no = i_num;
-  console.log(i_num);
   next();
 });
 
